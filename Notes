@@ -1,0 +1,143 @@
+# Diabetes Dataset Analysis — My Notes
+
+1. Project Objective
+- I used Python to explore a diabetes dataset containing **100,000 records**.
+- My aim was to understand the dataset, identify patterns related to diabetes diagnosis, and practise exploratory data analysis (EDA).
+- I wanted to investigate whether factors such as age, BMI, glucose levels, blood pressure, physical activity, and smoking status showed differences between people with and without a diabetes diagnosis.
+
+2. Data Inspection and Cleaning
+- I loaded the dataset using `pandas`.
+- I checked the number of rows and columns to understand the size of the dataset.
+- I inspected the first five rows using `df.head()` to understand its structure.
+- I checked the data types to identify numerical and categorical columns.
+- I examined unique values in categorical columns to understand the different categories.
+- I checked for missing values and duplicate rows.
+- I found **no missing values or duplicate rows**, so I did not need to remove records for these reasons.
+- I used `df.describe()` to examine the minimum, maximum, mean, and other statistics of numerical columns.
+- I created an `age_group` column to make it easier to compare diabetes diagnosis percentages across age groups.
+
+3. Distribution of Diabetes Diagnosis
+- I counted the number of people with and without a diabetes diagnosis.
+- I found that:
+  - **59,998 people (59.998%)** were diagnosed with diabetes.
+  - **40,002 people (40.002%)** were not diagnosed with diabetes.
+- I used a bar chart to visualise the distribution.
+- I noticed that the dataset contains a higher proportion of diagnosed cases than non-diagnosed cases.
+- I learned that this describes the composition of my dataset, not necessarily the prevalence of diabetes in the general population.
+
+4. Age Group Analysis
+- I grouped people into age ranges to make comparisons easier.
+- I calculated the percentage diagnosed with diabetes within each age group.
+- I found that the percentage increased across the age groups in my results:
+  - 18–29: 48%
+  - 30–39: 54%
+  - 40–49: 57%
+  - 50–59: 62%
+  - 60–69: 66%
+  - 70–79: 70%
+  - 80–90: 72%
+- I noticed a general upward trend in the percentage diagnosed with diabetes as age increased.
+- This suggests an association between age group and diabetes diagnosis in this dataset.
+- I understand that this does not prove that age alone causes diabetes.
+- I need to make sure my age-group boundaries are correct before treating these percentages as final.
+
+5. Average BMI by Diabetes Diagnosis
+- I calculated the average BMI for people with and without a diabetes diagnosis.
+- My results were:
+  - No diabetes diagnosis: **25.19**
+  - Diabetes diagnosis: **25.90**
+- I found that the diagnosed group had a slightly higher average BMI, with a difference of 0.71.
+- I used a bar chart to compare the two averages.
+- I learned that a difference in group averages does not mean every person with diabetes has a higher BMI.
+
+6. Average Fasting Glucose
+- I compared the average fasting glucose levels between the two diagnosis groups.
+- My results were:
+  - No diabetes diagnosis: **102.61**
+  - Diabetes diagnosis: **116.79**
+- I found a difference of 14.18 between the group averages.
+- I noticed that the diagnosed group had a higher average fasting glucose level.
+- I used a bar chart to make this difference easier to see.
+- I learned that comparing numerical averages can help me identify patterns in a dataset.
+- I should confirm the measurement units and dataset definitions before interpreting the values clinically.
+
+7. Average HbA1c
+- I calculated the average HbA1c for both groups.
+- My results were:
+  - No diabetes diagnosis: **5.84**
+  - Diabetes diagnosis: **6.97**
+- I found that the diagnosed group had a higher average HbA1c.
+- I used a bar chart to compare the averages.
+- I noticed that HbA1c showed a clearer difference between the two groups than BMI did.
+- I learned that different numerical features can show different levels of separation between groups.
+- I should confirm the units and meaning of the dataset's HbA1c values before making clinical interpretations.
+
+8. Average Systolic Blood Pressure
+- I compared the average systolic blood pressure between the two groups.
+- My results were:
+  - No diabetes diagnosis: **114.13**
+  - Diabetes diagnosis: **116.91**
+- I found a difference of 2.78 between the averages.
+- I noticed that the diagnosed group had a slightly higher average systolic blood pressure.
+- I learned that the difference was smaller than the differences I observed in fasting glucose and HbA1c.
+- I cannot conclude that diabetes caused the difference based on this analysis alone.
+
+9. Physical Activity
+- I compared average physical activity minutes per week between the two groups.
+- My results were:
+  - No diabetes diagnosis: **129.33 minutes per week**
+  - Diabetes diagnosis: **111.97 minutes per week**
+- I found that the diagnosed group had approximately 17.36 fewer average minutes of physical activity per week.
+- I planned to use a bar chart to compare these averages.
+- I noticed a difference in physical activity between the groups.
+- I understand that this does not prove that lower physical activity caused diabetes.
+- I also need to ensure my code plots the `physical_activity` variable rather than accidentally plotting the systolic blood pressure results again.
+
+10. Sleep Duration
+- I compared average sleep duration between the two groups.
+- My results were:
+  - No diabetes diagnosis: **7.0 hours per day**
+  - Diabetes diagnosis: **7.0 hours per day**
+- I found that the averages were the same when rounded to one decimal place.
+- I learned that not every feature will show an obvious difference between groups.
+- Equal averages do not necessarily mean the distributions of sleep duration are identical.
+
+11. Smoking Status
+- I used `pd.crosstab()` to compare smoking status with diabetes diagnosis.
+- I used `normalize="index"` to calculate percentages within each smoking category.
+- I selected the diagnosis value `1` to focus on the percentage diagnosed with diabetes in each category.
+- I created a bar chart to compare these percentages.
+- I noticed that the bars appeared to be around 60%, so I need to inspect the actual crosstab values before deciding whether the differences are meaningful.
+- I learned that the order of the variables in `pd.crosstab(A, B)` matters:
+  - `A` becomes the rows.
+  - `B` becomes the columns.
+- I also learned that `normalize="index"` calculates percentages across each row, rather than across the whole dataset.
+
+12. Data Quality and Limitations
+- I compared `diabetes_stage` with `diagnosed_diabetes` to check whether the categories appeared consistent.
+- I noticed that some stage categories had unexpected combinations:
+  - All records labelled `Type 2` had a diagnosis value of `1`.
+  - All records labelled `No Diabetes` and `Pre-Diabetes` had a diagnosis value of `0`.
+  - `Type 1` and `Gestational` contained both diagnosis values.
+- I flagged these patterns for further investigation rather than automatically assuming they were errors.
+- I learned that data should be checked for logical consistency, not just missing values and duplicates.
+- My analysis is descriptive, so I can identify associations and differences but cannot establish causation.
+- The dataset's source, definitions, and representativeness should be checked before drawing wider conclusions.
+
+13. What I Learned
+- I practised loading and inspecting a dataset with `pandas`.
+- I learned how to check data types, unique values, missing values, duplicates, and summary statistics.
+- I practised grouping data with `groupby()`.
+- I learned how to use `pd.crosstab()` to compare categorical variables.
+- I learned how `normalize="index"` can convert counts into within-group percentages.
+- I practised creating bar charts using `matplotlib`.
+- I learned to compare group averages while being careful not to confuse association with causation.
+- I also learned that checking code and validating data are important parts of data analysis, not just creating visualisations.
+
+14. Next Steps
+- I will correct the age-group boundaries and regenerate the age-related results.
+- I will fix and verify the physical activity chart.
+- I will inspect the exact smoking-status percentages.
+- I will consider creating a correlation heatmap to explore relationships between numerical features.
+- I will save my charts and include them in my GitHub repository.
+- I will check the dataset's source and licence before publishing or redistributing the data.
